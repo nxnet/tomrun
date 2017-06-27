@@ -1,0 +1,134 @@
+<test-suite>
+
+	<before-first name="before first case name"
+		description="before first case description">
+		<script id="1" name="first action" description="first action description" />
+		<script id="2" name="second action" description="second action description" />
+	</before-first>
+
+	<before-each name="before each case name"
+		description="before each case description">
+		<script id="1" name="first action" description="first action description" />
+		<script id="2" name="second action" description="second action description" />
+	</before-each>
+
+	<test-case id="1" name="test case 1 name"
+		description="Testing POST http request on GrinderTestServlet using regex assertion handler">
+
+		<before-first name="before first test name"
+			description="before first test description">
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+		</before-first>
+
+		<before-each name="before each test name"
+			description="before each test description">
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+		</before-each>
+
+		<test id="1" name="Test 1" description="Description of test 1">
+
+			<before-first name="before first action name"
+				description="before first action description">
+				<script id="1" name="first action" description="first action description" />
+				<script id="2" name="second action" description="second action description" />
+			</before-first>
+
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+
+			<after-last name="after last action name"
+				description="after last action description">
+				<script id="1" name="first action" description="first action description" />
+				<script id="2" name="second action" description="second action description" />
+			</after-last>
+
+		</test>
+
+		<test id="2" name="Test 2" description="Description of test 2">
+
+			<before-first name="before first action name"
+				description="before first action description">
+				<script id="1" name="first action" description="first action description" />
+				<script id="2" name="second action" description="second action description" />
+			</before-first>
+
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+		
+			<after-last name="after last action name"
+				description="after last action description">
+				<script id="1" name="first action" description="first action description" />
+				<script id="2" name="second action" description="second action description" />
+			</after-last>
+
+		</test>
+	
+		<after-each name="after each test name"
+			description="after each test description">
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+		</after-each>
+	
+		<after-last name="after last test name"
+			description="after last test description">
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+		</after-last>
+
+	</test-case>
+
+	<test-case id="2"
+		description="Testing POST http request on GrinderTestServlet using regex assertion handler">
+
+		<before-first id="BFT">
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+		</before-first>
+
+		<before-each id="BET">
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+		</before-each>
+
+		<test id="1" name="Test 1" description="Description of test 1">
+
+			<before-first id="BFA">
+				<script id="1" name="first action" description="first action description" />
+				<script id="2" name="second action" description="second action description" />
+			</before-first>
+
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+
+		</test>
+
+		<test id="2" name="Test 2" description="Description of test 2">
+
+			<before-first id="BFA">
+				<script id="1" name="first action" description="first action description" />
+				<script id="2" name="second action" description="second action description" />
+			</before-first>
+
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+
+		</test>
+
+	</test-case>
+
+	<after-each name="after each case name"
+		description="after each case description">
+		<script id="1" name="first action" description="first action description" />
+		<script id="2" name="second action" description="second action description" />
+	</after-each>
+
+	<after-last name="after last case name"
+		description="after last case description">
+		<script id="1" name="first action" description="first action description" />
+		<script id="2" name="second action" description="second action description" />
+	</after-last>
+
+</test-suite>
+    

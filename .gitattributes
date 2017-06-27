@@ -1,0 +1,155 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Explicitly declare text files you want to always be normalized and converted
+# to native line endings on checkout.
+INSTALL text
+KEYS text
+Makefile text
+LICENSE text
+NOTICE text
+README text
+USERINFO text
+abs-linkmap text
+abs-menulinks text
+*.aart text
+*.ac text
+*.ad text
+*.adoc text
+*.am text
+*.apt text
+*.as text
+*.c text
+*.cat text
+*.cfg text
+*.cgi text
+*.classpath text
+*.cmd text
+*.cnd text
+*.conf text
+*.config text
+*.cpp text
+*.css text
+*.cwiki text
+*.data text
+*.dcl text
+*.dtd text
+*.egrm text
+*.ent text
+*.ft text
+*.fn text
+*.fv text
+*.g text
+.gitattributes text
+*.grm text
+*.h text
+*.htc text
+.htaccess text
+*.handlers text
+*.html text
+*.ihtml text
+*.in text
+*.java text
+*.jsp text
+*.js text
+*.json text
+*.junit text
+*.jx text
+*.m text
+*.m4 text
+*.manifest text
+*.mdo text
+*.mdtext text
+*.meta text
+*.mf text
+*.MF text
+*.mod text
+*.ms text
+*.mxml text
+*.n3 text
+*.nroff text
+*.patch text
+*.pen text
+*.php text
+*.pl text
+*.pm text
+*.pod text
+*.pom text
+*.pro text
+*.project text
+*.properties text
+*.py text
+*.rb text
+*.rdf text
+*.rnc text
+*.rng text
+*.rnx text
+*.roles text
+*.rss text
+*.rst text
+*.scala text
+*.schemas text
+*.sql text
+*.SQL text
+*.svg text
+*.template text
+*.tld text
+*.TXT text
+*.txt text
+*.types text
+*.vm text
+*.vsl text
+*.wsdd text
+*.wsdl text
+*.xargs text
+*.xcat text
+*.xconf text
+*.xegrm text
+*.xgrm text
+*.xhtml text
+*.xhtml2 text
+*.xlex text
+*.xlog text
+*.xmap text
+*.xml text
+*.xpm text
+*.xroles text
+*.xsamples text
+*.xsd text
+*.xsl text
+*.xslt text
+*.xsp text
+*.xtest text
+*.xul text
+*.xweb text
+*.xwelcome text
+
+# Declare files that will always have CRLF line endings on checkout.
+*.bat text eol=crlf
+*.ppk text eol=crlf
+
+# Declare files that will always have LF line endings on checkout.
+*.bsh text eol=lf
+*.sh text eol=lf
+
+# Denote all files that are truly binary and should not be modified.
+exec_command_with_password binary
+ssh_fix_fingerprint binary
+*.doc binary
+*.docx binary
+*.gif binary
+*.gz binary
+*.ico binary
+*.jar binary
+*.jpg binary
+*.jpeg binary
+*.min.js binary
+*.pdf binary
+*.png binary
+*.swc binary 
+*.tar binary
+*.tgz binary
+*.tif binary
+*.tiff binary
+*.xls binary
+*.xlsx binary

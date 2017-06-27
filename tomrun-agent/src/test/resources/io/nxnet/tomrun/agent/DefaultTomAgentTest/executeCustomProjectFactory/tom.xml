@@ -1,0 +1,9 @@
+<test-project id="TOM" name="tom project name" 
+	description="tom project description"
+	factory="myCustomExecutionNodeFactory">
+    
+    <test-suite id="1" name="suite 1" description="Suite 1 description">
+   
+    </test-suite>
+    
+</test-project>

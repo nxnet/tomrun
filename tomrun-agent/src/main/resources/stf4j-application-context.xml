@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath*:tomrun-application-context-ext.xml"/>
+	
+    <bean id="defaultValueResolverFactory"
+          class="io.nxnet.tomrun.resolver.def.DefaultValueResolverFactory">
+    </bean>
+
+    <bean id="defaultPropertyFactory"
+          class="io.nxnet.tomrun.property.def.DefaultPropertyFactory">
+        <property name="valueResolverFactory" ref="defaultValueResolverFactory"/>
+    </bean>
+
+    <bean id="defaultContextFactory"
+          class="io.nxnet.tomrun.context.def.DefaultContextFactory">
+        <property name="propertyFactory" ref="defaultPropertyFactory"/>
+    </bean>
+
+    <bean id="defaultExecutionNodeFactory"
+          class="io.nxnet.tomrun.execution.impl.DefaultExecutionNodeFactory">
+    </bean>
+
+    <bean id="defaultTomAgent"
+          class="io.nxnet.tomrun.agent.DefaultTomAgent">
+        <property name="reader" ref="staxTestProjectReader"/>
+        <property name="observers">
+            <set>
+                <ref bean="tomExecutionReporter" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="staxTestProjectReader"
+          class="io.nxnet.tomrun.parser.StaxTestProjectReader">
+    </bean>
+
+    <bean id="tomExecutionReporter"
+          class="io.nxnet.tomrun.agent.TomExecutionReporter">
+    </bean>
+
+</beans>

@@ -1,0 +1,245 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.nxnet.tomrun</groupId>
+    <artifactId>tomrun</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>tomrun</name>
+    <description>STF4J Test Object Model umbrella project</description>
+
+    <modules>
+        <module>tomrun-model</module>
+        <module>tomrun-service-loader-api</module>
+        <module>tomrun-service-loader-default</module>
+        <module>tomrun-alias-api</module>
+        <module>tomrun-alias-default</module>
+        <module>tomrun-resolver-api</module>
+        <module>tomrun-resolver-default</module>
+        <module>tomrun-interpolation</module>
+        <module>tomrun-property-api</module>
+        <module>tomrun-property-default</module>
+        <module>tomrun-executor-api</module>
+        <module>tomrun-executor-simple</module>
+        <module>tomrun-context-api</module>
+        <module>tomrun-context-default</module>
+        <module>tomrun-assertion</module>
+        <module>tomrun-execution-api</module>
+        <module>tomrun-execution-default</module>
+        <module>tomrun-execution-spring</module>
+        <module>tomrun-agent</module>
+        <module>tomrun-parser</module>
+        <module>tomrun-cache</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-model</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-parser</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-service-loader-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-service-loader-default</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-cache</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-assertion</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-resolver-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-resolver-default</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-interpolation</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-property-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-property-default</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-executor-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-executor-simple</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-context-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-context-default</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-runner</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-execution-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-execution-default</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-execution-spring</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-alias-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.nxnet.tomrun</groupId>
+                <artifactId>tomrun-alias-default</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${tomrun-dependecy-version-apache-commons-io}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${tomrun-dependecy-version-apache-commons-lang}</version>
+            </dependency>
+
+            <dependency>
+                <artifactId>commons-beanutils</artifactId>
+                <groupId>commons-beanutils</groupId>
+                <version>${tomrun-dependecy-version-apache-commons-beanutils}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${tomrun-dependecy-version-slf4j}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${tomrun-dependecy-version-logback}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${tomrun-dependecy-version-junit}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.jodah</groupId>
+                <artifactId>concurrentunit</artifactId>
+                <version>${tomrun-dependecy-version-concurrentunit}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.jodah</groupId>
+            <artifactId>concurrentunit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <tomrun-dependecy-version-apache-commons-io>2.0.1</tomrun-dependecy-version-apache-commons-io>
+        <tomrun-dependecy-version-apache-commons-lang>2.6</tomrun-dependecy-version-apache-commons-lang>
+        <tomrun-dependecy-version-apache-commons-beanutils>1.8.3</tomrun-dependecy-version-apache-commons-beanutils>
+        <tomrun-dependecy-version-junit>4.8.2</tomrun-dependecy-version-junit>
+        <tomrun-dependecy-version-concurrentunit>0.4.2</tomrun-dependecy-version-concurrentunit>
+        <tomrun-dependecy-version-slf4j>1.7.25</tomrun-dependecy-version-slf4j>
+        <tomrun-dependecy-version-logback>1.2.3</tomrun-dependecy-version-logback>
+    </properties>
+</project>

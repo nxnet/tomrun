@@ -1,0 +1,92 @@
+<test-suite>
+
+	<after-each id="AEC">
+		<script id="1" name="first action" description="first action description" />
+		<script id="2" name="second action" description="second action description" />
+	</after-each>
+
+	<after-last id="ALC">
+		<script id="1" name="first action" description="first action description" />
+		<script id="2" name="second action" description="second action description" />
+	</after-last>
+
+	<test-case id="1" name="S4 test case 1"
+		description="Testing POST http request on GrinderTestServlet using regex assertion handler">
+
+		<after-each id="AET">
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+		</after-each>
+
+		<after-last id="ALT">
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+		</after-last>
+
+		<test id="1" name="Test 1" description="Description of test 1">
+
+			<after-last id="ALA">
+				<script id="1" name="first action" description="first action description" />
+				<script id="2" name="second action" description="second action description" />
+			</after-last>
+
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+
+		</test>
+
+		<test id="2" name="Test 2" description="Description of test 2">
+
+			<after-last id="ALA">
+				<script id="1" name="first action" description="first action description" />
+				<script id="2" name="second action" description="second action description" />
+			</after-last>
+
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+
+		</test>
+
+	</test-case>
+
+	<test-case id="2" name="S4 test case 2"
+		description="Testing POST http request on GrinderTestServlet using regex assertion handler">
+
+		<after-each id="AET">
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+		</after-each>
+
+		<after-last id="ALT">
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+		</after-last>
+
+		<test id="1" name="Test 1" description="Description of test 1">
+
+			<after-last id="ALA">
+				<script id="1" name="first action" description="first action description" />
+				<script id="2" name="second action" description="second action description" />
+			</after-last>
+
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+
+		</test>
+
+		<test id="2" name="Test 2" description="Description of test 2">
+
+			<after-last id="ALA">
+				<script id="1" name="first action" description="first action description" />
+				<script id="2" name="second action" description="second action description" />
+			</after-last>
+
+			<script id="1" name="first action" description="first action description" />
+			<script id="2" name="second action" description="second action description" />
+
+		</test>
+
+	</test-case>
+
+</test-suite>
+    

@@ -1,0 +1,34 @@
+<test-case>
+
+    <test id="1" name="Test 1" description="Description of test">
+                
+        <http-request id="1" description="simple get" method="POST" retry-period="1" retry-count="1">
+            <request-uri>http://localhost:8080/gtweb/GrinderTestServlet</request-uri>
+            <authorization>
+                <auth-method>DIGEST</auth-method>
+                <auth-preemptive>false</auth-preemptive>
+                <auth-realm>UserDatabase</auth-realm>
+                <auth-username>evinsta</auth-username>
+                <auth-password>evinsta</auth-password>
+            </authorization>
+            <http-response>
+                <status-line>
+                    <http-version assertion-handler="regex">[hH][tT][tT]P/1.1</http-version>
+                    <status-code assertion-handler="regex">2[0-9][0-9]</status-code>
+                    <reason-phrase assertion-handler="regex">OK</reason-phrase>
+                </status-line>
+                <header-fields>
+                    <header-field>
+                        <header-field-name>Server</header-field-name>
+                        <header-field-value assertion-handler="regex">Apache\-.+</header-field-value>
+                    </header-field>
+                </header-fields>
+                <message-body ignore-white-space="true false" assertion-handler="regex">(?s).*do post (success|failure).*</message-body>
+            </http-response>
+        </http-request>
+        
+        <script id="2" description="simple get" retry-period="1" retry-count="1"/>
+        
+    </test>
+    
+</test-case>

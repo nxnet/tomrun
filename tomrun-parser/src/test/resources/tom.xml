@@ -1,0 +1,457 @@
+<test-project id="TOM" name="tom project name" description="tom project description">
+    
+    <test-project-config>
+        <test-suite-path>ext/ts_{testSuiteId}</test-suite-path>
+        <test-case-path>${testSuitePath}/tc_${testCaseId}</test-case-path>
+        <test-path>${testCasePath}/test_${testId}</test-path>
+        <test-action-path>${testPath}/action_${actionId}</test-action-path>
+        <before-first factory="io.nxnet.tomrun.execution.impl.DefaultExecutionNodeFactory"/>
+    </test-project-config>
+    
+    <run>
+    
+    </run>
+    
+    <properties>
+        <property name="applicationHost">localhost</property>
+        <property name="applicationPort" value-resolver="literal">8080</property>
+        <property name="applicationUrl">http://${applicationHost}:${applicationPort}/gtweb</property>
+    	<property name="project_prop_1" value-resolver="io.nxnet.tomrun.resolver.def.LiteralResolver">project_prop_1_val</property>
+    	<property name="project_prop_2" value-resolver="io.nxnet.tomrun.agent.ext.LiteralResolver2">project_prop_2_val</property>
+    	<property name="project_prop_3" filters="property" value-resolver="io.nxnet.tomrun.agent.ext.LiteralResolver2">${project_prop_2}_project_prop_3_val</property>
+    	<property name="project_prop_4" filters="property, io.nxnet.tomrun.agent.ext.MyPropertyFilter" value-resolver="io.nxnet.tomrun.ext.LiteralResolver2">${applicationHost}_valllllllll</property>
+    </properties>
+
+	<before-first id="BFS">
+			
+	    <properties>
+	        <property name="bfs_prop_1">bfs_prop_1_val</property>
+	        <property name="bfs_prop_2">${project_prop_1}</property>
+	    </properties>
+			
+		<script id="1" name="first action" description="first action description"/>
+		<script id="2" name="second action" description="second action description"/>
+	</before-first>
+
+	<before-each id="BES">
+			
+	    <properties>
+	        <property name="bes_prop_1">bes_prop_1_val</property>
+	        <property name="bes_prop_2">${project_prop_1}</property>
+	    </properties>
+		
+		<script id="1" name="first action" description="first action description"/>
+		<script id="2" name="second action" description="second action description"/>
+	</before-each>
+
+	<after-each id="AES">
+	
+	    <properties>
+	        <property name="aes_prop_1">aes_prop_1_val</property>
+	        <property name="aes_prop_2">${project_prop_1}</property>
+	    </properties>
+		
+		<script id="1" name="first action" description="first action description"/>
+		<script id="2" name="second action" description="second action description"/>
+	</after-each>
+
+	<after-last id="ALS">
+	
+	    <properties>
+	        <property name="als_prop_1">als_prop_1_val</property>
+	        <property name="als_prop_2">${project_prop_1}</property>
+	    </properties>
+		
+		<script id="1" name="first action" description="first action description"/>
+		<script id="2" name="second action" description="second action description"/>
+	</after-last>
+
+    <test-suite id="1" name="suite 1" description="Suite 1 description">
+   
+	    <properties>
+	        <property name="s1_prop_1">s1_prop_1_val</property>
+	        <property name="s1_prop_2">${project_prop_1}</property>
+	    </properties>
+		
+        <before-first id="BFC">
+	        	
+		    <properties>
+		        <property name="s1_bfc_prop_1">s1_bfc_prop_1_val</property>
+		        <property name="s1_bfc_prop_2">${project_prop_1}</property>
+		        <property name="s1_bfc_prop_3">${s1_prop_1}</property>
+		    </properties>
+			
+        	<script id="1" name="first action" description="first action description"/>
+			<script id="2" name="second action" description="second action description"/>
+        </before-first>
+        
+        <before-each id="BEC">
+        
+		    <properties>
+		        <property name="s1_bec_prop_1">s1_bec_prop_1_val</property>
+		        <property name="s1_bec_prop_2">${project_prop_1}</property>
+		        <property name="s1_bec_prop_3">${s1_prop_1}</property>
+		    </properties>
+			
+        	<script id="1" name="first action" description="first action description"/>
+			<script id="2" name="second action" description="second action description"/>
+        </before-each>
+        
+        <after-each id="AEC">
+        
+		    <properties>
+		        <property name="s1_aec_prop_1">s1_aec_prop_1_val</property>
+		        <property name="s1_aec_prop_2">${project_prop_1}</property>
+		        <property name="s1_aec_prop_3">${s1_prop_1}</property>
+		    </properties>
+			
+        	<script id="1" name="first action" description="first action description"/>
+			<script id="2" name="second action" description="second action description"/>
+        </after-each>
+        
+        <after-last id="ALC">
+        
+		    <properties>
+		        <property name="s1_alc_prop_1">s1_alc_prop_1_val</property>
+		        <property name="s1_alc_prop_2">${project_prop_1}</property>
+		        <property name="s1_alc_prop_3">${s1_prop_1}</property>
+		    </properties>
+			
+        	<script id="1" name="first action" description="first action description"/>
+			<script id="2" name="second action" description="second action description"/>
+        </after-last>
+        
+        <test-case id="1" description="Testing POST http request on GrinderTestServlet using regex assertion handler">
+	        
+		    <properties>
+		        <property name="s1_c1_prop_1">s1_c1_prop_1_val</property>
+		        <property name="s1_c1_prop_2">${project_prop_1}</property>
+		        <property name="s1_c1_prop_3">${s1_prop_1}</property>
+		    </properties>
+			
+	        <before-first id="BFT">
+		        
+			    <properties>
+			        <property name="s1_c1_bft_prop_1">s1_c1_bft_prop_1_val</property>
+			        <property name="s1_c1_bft_prop_2">${project_prop_1}</property>
+			        <property name="s1_c1_bft_prop_3">${s1_prop_1}</property>
+			        <property name="s1_c1_bft_prop_4">${s1_c1_prop_1}</property>
+			    </properties>
+				
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </before-first>
+	        
+	        <before-each id="BET">
+	        
+			    <properties>
+			        <property name="s1_c1_bet_prop_1">s1_c1_bet_prop_1_val</property>
+			        <property name="s1_c1_bet_prop_2">${project_prop_1}</property>
+			        <property name="s1_c1_bet_prop_3">${s1_prop_1}</property>
+			        <property name="s1_c1_bet_prop_4">${s1_c1_prop_1}</property>
+			    </properties>
+				
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </before-each>
+	        
+	        <after-each id="AET">
+	        
+			    <properties>
+			        <property name="s1_c1_aet_prop_1">s1_c1_aet_prop_1_val</property>
+			        <property name="s1_c1_aet_prop_2">${project_prop_1}</property>
+			        <property name="s1_c1_aet_prop_3">${s1_prop_1}</property>
+			        <property name="s1_c1_aet_prop_4">${s1_c1_prop_1}</property>
+			    </properties>
+				
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </after-each>
+	        
+	        <after-last id="ALT">
+	        
+			    <properties>
+			        <property name="s1_c1_alt_prop_1">s1_c1_alt_prop_1_val</property>
+			        <property name="s1_c1_alt_prop_2">${project_prop_1}</property>
+			        <property name="s1_c1_alt_prop_3">${s1_prop_1}</property>
+			        <property name="s1_c1_alt_prop_4">${s1_c1_prop_1}</property>
+			    </properties>
+				
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </after-last>
+	        
+            <test id="1" name="Test 1" description="Description of test 1">
+		            
+			    <properties>
+			        <property name="s1_c1_t1_prop_1">s1_c1_t1_prop_1_val</property>
+			        <property name="s1_c1_t1_prop_2">${project_prop_1}</property>
+			        <property name="s1_c1_t1_prop_3">${s1_prop_1}</property>
+			        <property name="s1_c1_t1_prop_4">${s1_c1_prop_1}</property>
+			    </properties>
+				
+		        <before-first id="BFA">
+			        
+				    <properties>
+				        <property name="s1_c1_t1_bfa_prop_1">s1_c1_t1_bfa_prop_1_val</property>
+				        <property name="s1_c1_t1_bfa_prop_2">${project_prop_1}</property>
+				        <property name="s1_c1_t1_bfa_prop_3">${s1_prop_1}</property>
+				        <property name="s1_c1_t1_bfa_prop_4">${s1_c1_prop_1}</property>
+				        <property name="s1_c1_t1_bfa_prop_5">${s1_c1_t1_prop_1}</property>
+				    </properties>
+					
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </before-first>
+		        
+		        <after-last id="ALA">
+		        
+				    <properties>
+				        <property name="s1_c1_t1_ala_prop_1">s1_c1_t1_ala_prop_1_val</property>
+				        <property name="s1_c1_t1_ala_prop_2">${project_prop_1}</property>
+				        <property name="s1_c1_t1_ala_prop_3">${s1_prop_1}</property>
+				        <property name="s1_c1_t1_ala_prop_4">${s1_c1_prop_1}</property>
+				        <property name="s1_c1_t1_ala_prop_5">${s1_c1_t1_prop_1}</property>
+				    </properties>
+					
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </after-last>
+		        
+		        <script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+				
+            </test>
+            
+            <test id="2" name="Test 2" description="Description of test 2">
+	            
+		        <before-first id="BFA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </before-first>
+		        
+		        <after-last id="ALA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </after-last>
+		        
+		        <script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+				
+            </test>
+            
+        </test-case>
+        
+        <test-case id="2" description="Testing POST http request on GrinderTestServlet using regex assertion handler">
+            
+	        <before-first id="BFT">
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </before-first>
+	        
+	        <before-each id="BET">
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </before-each>
+	        
+	        <after-each id="AET">
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </after-each>
+	        
+	        <after-last id="ALT">
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </after-last>
+	        
+            <test id="1" name="Test 1" description="Description of test 1">
+	            
+		        <before-first id="BFA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </before-first>
+		        
+		        <after-last id="ALA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </after-last>
+		        
+                <script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+				
+            </test>
+        
+            <test id="2" name="Test 2" description="Description of test 2">
+	            
+		        <before-first id="BFA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </before-first>
+		        
+		        <after-last id="ALA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </after-last>
+		        
+                <script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+				
+            </test>
+        
+        </test-case>
+        
+    </test-suite>
+    
+    <test-suite id="2" name="suite 2" description="Suite 2 description">
+   
+        <before-first id="BFC">
+        	<script id="1" name="first action" description="first action description"/>
+			<script id="2" name="second action" description="second action description"/>
+        </before-first>
+        
+        <before-each id="BEC">
+        	<script id="1" name="first action" description="first action description"/>
+			<script id="2" name="second action" description="second action description"/>
+        </before-each>
+        
+        <after-each id="AEC">
+        	<script id="1" name="first action" description="first action description"/>
+			<script id="2" name="second action" description="second action description"/>
+        </after-each>
+        
+        <after-last id="ALC">
+        	<script id="1" name="first action" description="first action description"/>
+			<script id="2" name="second action" description="second action description"/>
+        </after-last>
+        
+        <test-case id="1" description="Testing POST http request on GrinderTestServlet using regex assertion handler">
+	        
+	        <before-first id="BFT">
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </before-first>
+	        
+	        <before-each id="BET">
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </before-each>
+	        
+	        <after-each id="AET">
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </after-each>
+	        
+	        <after-last id="ALT">
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </after-last>
+	        
+            <test id="1" name="Test 1" description="Description of test 1">
+	            
+		        <before-first id="BFA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </before-first>
+		        
+		        <after-last id="ALA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </after-last>
+		        
+		        <script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+				
+            </test>
+            
+            <test id="2" name="Test 2" description="Description of test 2">
+	            
+		        <before-first id="BFA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </before-first>
+		        
+		        <after-last id="ALA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </after-last>
+		        
+		        <script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+				
+            </test>
+            
+        </test-case>
+        
+        <test-case id="2" description="Testing POST http request on GrinderTestServlet using regex assertion handler">
+            
+	        <before-first id="BFT">
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </before-first>
+	        
+	        <before-each id="BET">
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </before-each>
+	        
+	        <after-each id="AET">
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </after-each>
+	        
+	        <after-last id="ALT">
+	        	<script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+	        </after-last>
+	        
+            <test id="1" name="Test 1" description="Description of test 1">
+	            
+		        <before-first id="BFA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </before-first>
+		        
+		        <after-last id="ALA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </after-last>
+		        
+                <script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+				
+            </test>
+        
+            <test id="2" name="Test 2" description="Description of test 2">
+	            
+		        <before-first id="BFA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </before-first>
+		        
+		        <after-last id="ALA">
+		        	<script id="1" name="first action" description="first action description"/>
+					<script id="2" name="second action" description="second action description"/>
+		        </after-last>
+		        
+                <script id="1" name="first action" description="first action description"/>
+				<script id="2" name="second action" description="second action description"/>
+				
+            </test>
+        
+        </test-case>
+        
+    </test-suite>
+    
+    <test-suite id="3" name="Suite 3 Name" description="Suite 3 Description">
+    	<include file="suite3.xml"/>
+    </test-suite>
+    
+    <test-suite id="4" name="Suite 4 Name" description="Suite 4 Description">
+    	<dynamic-include file="/suite4.xml"/>
+    </test-suite>
+    
+    <test-suite id="5" name="Suite 5 Name" description="Suite 5 Description">
+    	<dynamic-include/>
+    </test-suite>
+    
+</test-project>

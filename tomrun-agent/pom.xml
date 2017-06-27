@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.nxnet.tomrun</groupId>
+        <artifactId>tomrun</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>tomrun-agent</artifactId>
+    <name>tomrun agent</name>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>io.nxnet.tomrun</groupId>
+            <artifactId>tomrun-model</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nxnet.tomrun</groupId>
+            <artifactId>tomrun-parser</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nxnet.tomrun</groupId>
+            <artifactId>tomrun-execution-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nxnet.tomrun</groupId>
+            <artifactId>tomrun-execution-default</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nxnet.tomrun</groupId>
+            <artifactId>tomrun-resolver-default</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nxnet.tomrun</groupId>
+            <artifactId>tomrun-service-loader-default</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nxnet.tomrun</groupId>
+            <artifactId>tomrun-alias-default</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nxnet.tomrun</groupId>
+            <artifactId>tomrun-property-default</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nxnet.tomrun</groupId>
+            <artifactId>tomrun-interpolation</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nxnet.tomrun</groupId>
+            <artifactId>tomrun-context-default</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.nxnet.tomrun</groupId>
+            <artifactId>tomrun-executor-simple</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>3.2.3.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>3.2.3.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.2.3.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

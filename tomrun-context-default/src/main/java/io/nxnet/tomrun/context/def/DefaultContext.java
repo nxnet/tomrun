@@ -227,8 +227,20 @@ public class DefaultContext implements OwnableContext
     @Override
     public Property findPropertyObject(String name)
     {
+        return this.findPropertyObject(name, false);
+    }
+
+    @Override
+    public Property findPropertyObject(String name, boolean skipThisContext)
+    {
         // Find property in this context
-        Property property = this.getPropertyObject(name);
+        Property property = null;
+        if (!skipThisContext)
+        {
+            property = this.getPropertyObject(name);
+        }
+
+        // Find property in parent context
         if (property == null)
         {
             // If property is not found in this context, try to find in parent context
@@ -236,7 +248,7 @@ public class DefaultContext implements OwnableContext
                     this.owner.getParent().getContext() : null;
             if (parentContext != null)
             {
-                property = parentContext.findPropertyObject(name);
+                property = parentContext.findPropertyObject(name, false);
             }
         }
 

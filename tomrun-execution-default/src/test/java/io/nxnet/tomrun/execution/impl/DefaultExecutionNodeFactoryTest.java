@@ -393,7 +393,143 @@ public class DefaultExecutionNodeFactoryTest
         // Assert suite 2 context
         ExecutionAssert.assertEquals(suite3, project1.getContext(), LoggerFactory.getLogger(
                 Executor.DEFAULT_LOGGER_NAME), this.hostName, this.pid, this.threadName, 0, suite3.getContext());
+    }
 
+    @Test
+    public void getNode_projectAndSuitesElementsWithProperties() throws Exception
+    {
+        String propertyName = "prop";
+        ExecutionNode project1 = factory.getNode(
+                TestProject.builder().withId("1")
+                .addProperty(Property.builder().withName(propertyName).withValue("I'm project 1").build())
+                .addTestSuite(TestSuite.builder().withId("1")
+                        .addProperty(Property.builder().withName(propertyName).withValue("I'm suite 1").build())
+                        .build())
+                .addTestSuite(TestSuite.builder().withId("2")
+                        .addProperty(Property.builder().withName(propertyName).withValue("I'm suite 2").build())
+                        .build())
+                .addTestSuite(TestSuite.builder().withId("3")
+                        .addProperty(Property.builder().withName(propertyName).withValue("I'm suite 3").build())
+                        .build())
+                .build());
+
+        // Assert project
+        ExecutionAssert.assertEquals("1", null, null, ExecutionNodeType.PROJECT, 0, null, null, null,
+                project1);
+        ExecutionAssert.assertEquals(true, false, true, true, false, false, false, false, project1);
+        // Assert project context
+        ExecutionAssert.assertEquals(project1, null, LoggerFactory.getLogger(Executor.DEFAULT_LOGGER_NAME),
+                this.hostName, this.pid, this.threadName, 0, project1.getContext());
+        assertEquals("unexpected property value", "I'm project 1", project1.getContext().findProperty(propertyName));
+
+        // Assert project iterator
+        Iterator<ExecutionNode> nodeIter = project1.getIter();
+        assertTrue("project node expected", nodeIter.hasNext());
+        assertTrue("project node instance expected", nodeIter.next() == project1);
+        assertTrue("suite 1 node expected", nodeIter.hasNext());
+        ExecutionNode suite1 = nodeIter.next();
+        assertTrue("suite 2 node expected", nodeIter.hasNext());
+        ExecutionNode suite2 = nodeIter.next();
+        assertTrue("suite 3 node expected", nodeIter.hasNext());
+        ExecutionNode suite3 = nodeIter.next();
+        assertFalse("no other nodes expected", nodeIter.hasNext());
+
+        // Assert suite 1
+        ExecutionAssert.assertEquals("1", null, null, ExecutionNodeType.SUITE, 1, project1, null, suite2,
+                suite1);
+        ExecutionAssert.assertEquals(false, true, false, false, true, false, true, false, suite1);
+        // Assert suite 1 context
+        ExecutionAssert.assertEquals(suite1, project1.getContext(), LoggerFactory.getLogger(
+                Executor.DEFAULT_LOGGER_NAME), this.hostName, this.pid, this.threadName, 0, suite1.getContext());
+        assertEquals("unexpected property value", "I'm suite 1", suite1.getContext().findProperty(propertyName));
+
+        // Assert suite 2
+        ExecutionAssert.assertEquals("2", null, null, ExecutionNodeType.SUITE, 1, project1, suite1, suite3,
+                suite2);
+        ExecutionAssert.assertEquals(false, true, false, false, true, false, true, false, suite2);
+        // Assert suite 2 context
+        ExecutionAssert.assertEquals(suite2, project1.getContext(), LoggerFactory.getLogger(
+                Executor.DEFAULT_LOGGER_NAME), this.hostName, this.pid, this.threadName, 0, suite2.getContext());
+        assertEquals("unexpected property value", "I'm suite 2", suite2.getContext().findProperty(propertyName));
+
+        // Assert suite 3
+        ExecutionAssert.assertEquals("3", null, null, ExecutionNodeType.SUITE, 1, project1, suite2, null,
+                suite3);
+        ExecutionAssert.assertEquals(false, true, true, false, true, false, true, false, suite3);
+        // Assert suite 2 context
+        ExecutionAssert.assertEquals(suite3, project1.getContext(), LoggerFactory.getLogger(
+                Executor.DEFAULT_LOGGER_NAME), this.hostName, this.pid, this.threadName, 0, suite3.getContext());
+        assertEquals("unexpected property value", "I'm suite 3", suite3.getContext().findProperty(propertyName));
+    }
+
+    @Test
+    public void getNode_projectAndSuitesElementsWithParametrizedProperties() throws Exception
+    {
+        String propertyName = "prop";
+        ExecutionNode project1 = factory.getNode(
+                TestProject.builder().withId("1")
+                .addProperty(Property.builder().withName(propertyName).withValue("I'm project 1").build())
+                .addTestSuite(TestSuite.builder().withId("1")
+                        .addProperty(Property.builder().withName(propertyName).withValue("${"+ propertyName + "}")
+                                .build())
+                        .build())
+                .addTestSuite(TestSuite.builder().withId("2")
+                        .addProperty(Property.builder().withName(propertyName).withValue("${"+ propertyName + "}")
+                                .build())
+                        .build())
+                .addTestSuite(TestSuite.builder().withId("3")
+                        .addProperty(Property.builder().withName(propertyName).withValue("${"+ propertyName + "}")
+                                .build())
+                        .build())
+                .build());
+
+        // Assert project
+        ExecutionAssert.assertEquals("1", null, null, ExecutionNodeType.PROJECT, 0, null, null, null,
+                project1);
+        ExecutionAssert.assertEquals(true, false, true, true, false, false, false, false, project1);
+        // Assert project context
+        ExecutionAssert.assertEquals(project1, null, LoggerFactory.getLogger(Executor.DEFAULT_LOGGER_NAME),
+                this.hostName, this.pid, this.threadName, 0, project1.getContext());
+        assertEquals("unexpected property value", "I'm project 1", project1.getContext().findProperty(propertyName));
+
+        // Assert project iterator
+        Iterator<ExecutionNode> nodeIter = project1.getIter();
+        assertTrue("project node expected", nodeIter.hasNext());
+        assertTrue("project node instance expected", nodeIter.next() == project1);
+        assertTrue("suite 1 node expected", nodeIter.hasNext());
+        ExecutionNode suite1 = nodeIter.next();
+        assertTrue("suite 2 node expected", nodeIter.hasNext());
+        ExecutionNode suite2 = nodeIter.next();
+        assertTrue("suite 3 node expected", nodeIter.hasNext());
+        ExecutionNode suite3 = nodeIter.next();
+        assertFalse("no other nodes expected", nodeIter.hasNext());
+
+        // Assert suite 1
+        ExecutionAssert.assertEquals("1", null, null, ExecutionNodeType.SUITE, 1, project1, null, suite2,
+                suite1);
+        ExecutionAssert.assertEquals(false, true, false, false, true, false, true, false, suite1);
+        // Assert suite 1 context
+        ExecutionAssert.assertEquals(suite1, project1.getContext(), LoggerFactory.getLogger(
+                Executor.DEFAULT_LOGGER_NAME), this.hostName, this.pid, this.threadName, 0, suite1.getContext());
+        assertEquals("unexpected property value", "I'm project 1", suite1.getContext().findProperty(propertyName));
+
+        // Assert suite 2
+        ExecutionAssert.assertEquals("2", null, null, ExecutionNodeType.SUITE, 1, project1, suite1, suite3,
+                suite2);
+        ExecutionAssert.assertEquals(false, true, false, false, true, false, true, false, suite2);
+        // Assert suite 2 context
+        ExecutionAssert.assertEquals(suite2, project1.getContext(), LoggerFactory.getLogger(
+                Executor.DEFAULT_LOGGER_NAME), this.hostName, this.pid, this.threadName, 0, suite2.getContext());
+        assertEquals("unexpected property value", "I'm project 1", suite2.getContext().findProperty(propertyName));
+
+        // Assert suite 3
+        ExecutionAssert.assertEquals("3", null, null, ExecutionNodeType.SUITE, 1, project1, suite2, null,
+                suite3);
+        ExecutionAssert.assertEquals(false, true, true, false, true, false, true, false, suite3);
+        // Assert suite 2 context
+        ExecutionAssert.assertEquals(suite3, project1.getContext(), LoggerFactory.getLogger(
+                Executor.DEFAULT_LOGGER_NAME), this.hostName, this.pid, this.threadName, 0, suite3.getContext());
+        assertEquals("unexpected property value", "I'm project 1", suite3.getContext().findProperty(propertyName));
     }
 
 }

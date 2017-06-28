@@ -71,23 +71,39 @@ public class InterpolatableProperty implements Property
                 interpolatedValue = propertyValue;
                 break;
             case ALWAYS:
-                interpolatedValue = this.attributeInterpolator.interpolate(this.propertyInterpolator.interpolate(
-                        propertyValue, new PropertyReplacementStrategy(this.propertyContext)), 
+                interpolatedValue = this.attributeInterpolator.interpolate(
+                        this.propertyInterpolator.interpolate(propertyValue,
+                                new PropertyReplacementStrategy(this.property.getName(), this.propertyContext)),
                         new AttributeReplacementStrategy(this.propertyContext));
                 break;
             case ONCE:
-                cacheId = RunContext.builder().build();
+                if (cacheId == null)
+                {
+                    cacheId = RunContext.builder().build();
+                }
             case PER_HOST:
-                cacheId = RunContext.builder().withHostName(runContext.getHostName()).build();
+                if (cacheId == null)
+                {
+                    cacheId = RunContext.builder().withHostName(runContext.getHostName()).build();
+                }
             case PER_PROCES:
-                cacheId = RunContext.builder().withHostName(runContext.getHostName()).withPid(runContext.getPid())
+                if (cacheId == null)
+                {
+                    cacheId = RunContext.builder().withHostName(runContext.getHostName()).withPid(runContext.getPid())
                         .build();
+                }
             case PER_THREAD:
-                cacheId = RunContext.builder().withHostName(runContext.getHostName()).withPid(runContext.getPid())
+                if (cacheId == null)
+                {
+                    cacheId = RunContext.builder().withHostName(runContext.getHostName()).withPid(runContext.getPid())
                         .withThreadName(runContext.getThreadName()).build();
+                }
             case PER_RUN:
-                cacheId = RunContext.builder().withHostName(runContext.getHostName()).withPid(runContext.getPid())
+                if (cacheId == null)
+                {
+                    cacheId = RunContext.builder().withHostName(runContext.getHostName()).withPid(runContext.getPid())
                         .withThreadName(runContext.getThreadName()).withRunNumber(runContext.getRunNumber()).build();
+                }
             default:
                 try
                 {
@@ -97,8 +113,9 @@ public class InterpolatableProperty implements Property
                         @Override
                         public String initializeValue() throws ValueInitializationException
                         {
-                            return attributeInterpolator.interpolate(propertyInterpolator.interpolate(propertyValue, 
-                                    new PropertyReplacementStrategy(propertyContext)), 
+                            return attributeInterpolator.interpolate(
+                                    propertyInterpolator.interpolate(propertyValue,
+                                            new PropertyReplacementStrategy(property.getName(), propertyContext)),
                                     new AttributeReplacementStrategy(propertyContext));
                         }
                     });
@@ -148,13 +165,28 @@ public class InterpolatableProperty implements Property
             Property referredPropertyObject = null;
             for (String referredProperty : referredProperties)
             {
-                referredPropertyObject = this.propertyContext.findPropertyObject(referredProperty);
-                if (referredPropertyObject.getInterpolationStrategy() == null)
+                // If this property refers to a property with the same name, i.e.
+                // property is referencing equally named property from higher context
+                if (referredProperty != null && referredProperty.equals(this.getName()))
                 {
-                    // Trigger referred property interpolation strategy smart detection
-                    referredPropertyObject.getValue(runContext);
+                    referredPropertyObject = this.propertyContext.findPropertyObject(referredProperty, true);
                 }
-                refPropsInterpolationStrategies.add(referredPropertyObject.getInterpolationStrategy());
+                // Else, property is referencing NOT equally named property from its context or higher context
+                else
+                {
+                    referredPropertyObject = this.propertyContext.findPropertyObject(referredProperty);
+                }
+
+                // We found referred property
+                if (referredPropertyObject != null)
+                {
+                    if (referredPropertyObject.getInterpolationStrategy() == null)
+                    {
+                        // Trigger referred property interpolation strategy smart detection
+                        referredPropertyObject.getValue(runContext);
+                    }
+                    refPropsInterpolationStrategies.add(referredPropertyObject.getInterpolationStrategy());
+                }
             }
 
             // Choose most suitable interpolation strategy

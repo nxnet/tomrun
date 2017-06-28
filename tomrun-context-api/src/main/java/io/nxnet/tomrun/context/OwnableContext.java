@@ -11,4 +11,6 @@ public interface OwnableContext extends Context
     Property getPropertyObject(String name);
 
     Property findPropertyObject(String name);
+
+    Property findPropertyObject(String name, boolean skipThisContext);
 }

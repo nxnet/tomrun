@@ -37,8 +37,6 @@ public class DefaultExecutionNodeFactoryTest
 
     private static final String UNEXISTING_EXECUTION_NODE_FACTORY_NAME = "unexistingExecutionNodeFactory";
 
-    private ExecutionNodeWritter writer;
-
     private String hostName;
 
     private String pid;
@@ -54,16 +52,9 @@ public class DefaultExecutionNodeFactoryTest
     public void setUp() throws Exception
     {
         this.factory = new DefaultExecutionNodeFactory();
-        this.writer = new ExecutionNodeWritter(new PrintWriter(System.out));
         this.hostName = InetAddress.getLocalHost().getLocalHost().getHostName(); 
         this.pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
         this.threadName = Thread.currentThread().getName();
-    }
-
-    @After
-    public void tearDown() throws Exception
-    {
-        this.writer.close();;
     }
 
     @Test
@@ -141,7 +132,7 @@ public class DefaultExecutionNodeFactoryTest
         assertTrue("unexpected context properties", context.getPropertyNames().isEmpty());
         assertTrue("unexpected context attributes", context.getAttributeNames().isEmpty());
         assertEquals("unexpected context run number", 0, context.getRunNumber());
-        Iterator<ExecutionNode> nodeIter = executionNode.getIter();
+        Iterator<ExecutionNode> nodeIter = executionNode.iterator();
         assertTrue("project node expected", nodeIter.hasNext());
         assertTrue("project node instance expected", nodeIter.next() == executionNode);
         assertFalse("no further nodes expected", nodeIter.hasNext());
@@ -184,7 +175,7 @@ public class DefaultExecutionNodeFactoryTest
         assertEquals("unexpected number of context attributes", 1, context.getAttributeNames().size());
         assertEquals("unexpected context attribute", "tp1attr1val", context.getAttribute("tp1attr1"));
         
-        Iterator<ExecutionNode> nodeIter = executionNode.getIter();
+        Iterator<ExecutionNode> nodeIter = executionNode.iterator();
         assertTrue("project node expected", nodeIter.hasNext());
         assertTrue("project node instance expected", nodeIter.next() == executionNode);
         assertFalse("no other nodes expected", nodeIter.hasNext());
@@ -215,7 +206,7 @@ public class DefaultExecutionNodeFactoryTest
         ExecutionAssert.assertEquals(executionNode, null, LoggerFactory.getLogger(Executor.DEFAULT_LOGGER_NAME),
                 this.hostName, this.pid, this.threadName, 0, executionNode.getContext());
 
-        Iterator<ExecutionNode> nodeIter = executionNode.getIter();
+        Iterator<ExecutionNode> nodeIter = executionNode.iterator();
         assertTrue("project node expected", nodeIter.hasNext());
         assertTrue("project node instance expected", nodeIter.next() == executionNode);
         assertTrue("suite node expected", nodeIter.hasNext());
@@ -238,7 +229,7 @@ public class DefaultExecutionNodeFactoryTest
         ExecutionAssert.assertEquals(executionNode, null, LoggerFactory.getLogger(Executor.DEFAULT_LOGGER_NAME),
                 this.hostName, this.pid, this.threadName, 0, executionNode.getContext());
 
-        Iterator<ExecutionNode> nodeIter = executionNode.getIter();
+        Iterator<ExecutionNode> nodeIter = executionNode.iterator();
         assertTrue("project node expected", nodeIter.hasNext());
         assertTrue("project node instance expected", nodeIter.next() == executionNode);
         assertTrue("suite node expected", nodeIter.hasNext());
@@ -290,7 +281,7 @@ public class DefaultExecutionNodeFactoryTest
                 .put("tp1prop3", "attr1val").put("tp1prop4", "attr2val"), new MapBuilder<String, Object>()
                 .put("attr1", "attr1val").put("attr2", "attr2val"), project1.getContext());
         // Assert project iterator
-        Iterator<ExecutionNode> nodeIter = project1.getIter();
+        Iterator<ExecutionNode> nodeIter = project1.iterator();
         assertTrue("project node expected", nodeIter.hasNext());
         assertTrue("project node instance expected", nodeIter.next() == project1);
 
@@ -351,15 +342,11 @@ public class DefaultExecutionNodeFactoryTest
                 .build());
 
         // Assert project
-        ExecutionAssert.assertEquals("1", null, null, ExecutionNodeType.PROJECT, 0, null, null, null,
-                project1);
+        ExecutionAssert.assertEquals("1", null, null, ExecutionNodeType.PROJECT, 0, null, null, null, project1);
         ExecutionAssert.assertEquals(true, false, true, true, false, false, false, false, project1);
-        // Assert project context
-        ExecutionAssert.assertEquals(project1, null, LoggerFactory.getLogger(Executor.DEFAULT_LOGGER_NAME),
-                this.hostName, this.pid, this.threadName, 0, project1.getContext());
 
         // Assert project iterator
-        Iterator<ExecutionNode> nodeIter = project1.getIter();
+        Iterator<ExecutionNode> nodeIter = project1.iterator();
         assertTrue("project node expected", nodeIter.hasNext());
         assertTrue("project node instance expected", nodeIter.next() == project1);
         assertTrue("suite 1 node expected", nodeIter.hasNext());
@@ -371,28 +358,16 @@ public class DefaultExecutionNodeFactoryTest
         assertFalse("no other nodes expected", nodeIter.hasNext());
 
         // Assert suite 1
-        ExecutionAssert.assertEquals("1", null, null, ExecutionNodeType.SUITE, 1, project1, null, suite2,
-                suite1);
+        ExecutionAssert.assertEquals("1", null, null, ExecutionNodeType.SUITE, 1, project1, null, suite2, suite1);
         ExecutionAssert.assertEquals(false, true, false, false, true, false, true, false, suite1);
-        // Assert suite 1 context
-        ExecutionAssert.assertEquals(suite1, project1.getContext(), LoggerFactory.getLogger(
-                Executor.DEFAULT_LOGGER_NAME), this.hostName, this.pid, this.threadName, 0, suite1.getContext());
 
         // Assert suite 2
-        ExecutionAssert.assertEquals("2", null, null, ExecutionNodeType.SUITE, 1, project1, suite1, suite3,
-                suite2);
+        ExecutionAssert.assertEquals("2", null, null, ExecutionNodeType.SUITE, 1, project1, suite1, suite3, suite2);
         ExecutionAssert.assertEquals(false, true, false, false, true, false, true, false, suite2);
-        // Assert suite 2 context
-        ExecutionAssert.assertEquals(suite2, project1.getContext(), LoggerFactory.getLogger(
-                Executor.DEFAULT_LOGGER_NAME), this.hostName, this.pid, this.threadName, 0, suite2.getContext());
 
         // Assert suite 3
-        ExecutionAssert.assertEquals("3", null, null, ExecutionNodeType.SUITE, 1, project1, suite2, null,
-                suite3);
+        ExecutionAssert.assertEquals("3", null, null, ExecutionNodeType.SUITE, 1, project1, suite2, null, suite3);
         ExecutionAssert.assertEquals(false, true, true, false, true, false, true, false, suite3);
-        // Assert suite 2 context
-        ExecutionAssert.assertEquals(suite3, project1.getContext(), LoggerFactory.getLogger(
-                Executor.DEFAULT_LOGGER_NAME), this.hostName, this.pid, this.threadName, 0, suite3.getContext());
     }
 
     @Test
@@ -423,7 +398,7 @@ public class DefaultExecutionNodeFactoryTest
         assertEquals("unexpected property value", "I'm project 1", project1.getContext().findProperty(propertyName));
 
         // Assert project iterator
-        Iterator<ExecutionNode> nodeIter = project1.getIter();
+        Iterator<ExecutionNode> nodeIter = project1.iterator();
         assertTrue("project node expected", nodeIter.hasNext());
         assertTrue("project node instance expected", nodeIter.next() == project1);
         assertTrue("suite 1 node expected", nodeIter.hasNext());
@@ -493,7 +468,7 @@ public class DefaultExecutionNodeFactoryTest
         assertEquals("unexpected property value", "I'm project 1", project1.getContext().findProperty(propertyName));
 
         // Assert project iterator
-        Iterator<ExecutionNode> nodeIter = project1.getIter();
+        Iterator<ExecutionNode> nodeIter = project1.iterator();
         assertTrue("project node expected", nodeIter.hasNext());
         assertTrue("project node instance expected", nodeIter.next() == project1);
         assertTrue("suite 1 node expected", nodeIter.hasNext());
@@ -530,6 +505,46 @@ public class DefaultExecutionNodeFactoryTest
         ExecutionAssert.assertEquals(suite3, project1.getContext(), LoggerFactory.getLogger(
                 Executor.DEFAULT_LOGGER_NAME), this.hostName, this.pid, this.threadName, 0, suite3.getContext());
         assertEquals("unexpected property value", "I'm project 1", suite3.getContext().findProperty(propertyName));
+    }
+
+    @Test
+    public void getNode_projectAndHierarchicalSuitesElementsWithIdOnly() throws Exception
+    {
+        ExecutionNode project1 = factory.getNode(TestProject.builder().withId("1")
+                .addTestSuite(TestSuite.builder().withId("1")
+                        .addTestSuite(TestSuite.builder().withId("2")
+                                .addTestSuite(TestSuite.builder().withId("3").build())
+                                .build())
+                        .build())
+                .build());
+
+        // Assert project
+        ExecutionAssert.assertEquals("1", null, null, ExecutionNodeType.PROJECT, 0, null, null, null, project1);
+        ExecutionAssert.assertEquals(true, false, true, true, false, false, false, false, project1);
+
+        // Assert project iterator
+        Iterator<ExecutionNode> nodeIter = project1.iterator();
+        assertTrue("project node expected", nodeIter.hasNext());
+        assertTrue("project node instance expected", nodeIter.next() == project1);
+        assertTrue("suite 1 node expected", nodeIter.hasNext());
+        ExecutionNode suite1 = nodeIter.next();
+        assertTrue("suite 2 node expected", nodeIter.hasNext());
+        ExecutionNode suite2 = nodeIter.next();
+        assertTrue("suite 3 node expected", nodeIter.hasNext());
+        ExecutionNode suite3 = nodeIter.next();
+        assertFalse("no other nodes expected", nodeIter.hasNext());
+
+        // Assert suite 1
+        ExecutionAssert.assertEquals("1", null, null, ExecutionNodeType.SUITE, 1, project1, null, null, suite1);
+        ExecutionAssert.assertEquals(false, false, true, true, true, false, true, false, suite1);
+
+        // Assert suite 2
+        ExecutionAssert.assertEquals("2", null, null, ExecutionNodeType.SUITE, 2, suite1, null, null, suite2);
+        ExecutionAssert.assertEquals(false, false, true, true, true, false, true, false, suite2);
+
+        // Assert suite 3
+        ExecutionAssert.assertEquals("3", null, null, ExecutionNodeType.SUITE, 3, suite2, null, null, suite3);
+        ExecutionAssert.assertEquals(false, true, true, false, true, false, true, false, suite3);
     }
 
 }

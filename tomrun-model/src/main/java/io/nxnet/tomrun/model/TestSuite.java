@@ -19,6 +19,8 @@ public class TestSuite implements WrapperAwareElement
 
     private Set<TestCase> testCases = new LinkedHashSet<TestCase>();
 
+    private Set<TestSuite> testSuites = new LinkedHashSet<TestSuite>();
+
     private Properties properties = Properties.builder().build();
 
     private DynamicInclude dynamicInclude;
@@ -45,6 +47,7 @@ public class TestSuite implements WrapperAwareElement
         this.name = builder.name;
         this.description = builder.description;
         this.testCases = builder.testCases;
+        this.testSuites = builder.testSuites;
         this.properties = builder.properties;
         this.dynamicInclude = builder.dynamicInclude;
         this.beforeFirst = builder.beforeFirst;
@@ -317,9 +320,16 @@ public class TestSuite implements WrapperAwareElement
     public Collection<WrapperAwareElement> getChildren()
     {
         Collection<WrapperAwareElement> children = new ArrayList<WrapperAwareElement>();
-        if (this.testCases != null)
+        if (this.testCases != null && !this.testCases.isEmpty())
         {
             for (TestCase child : this.testCases)
+            {
+                children.add(child);
+            }
+        }
+        if (this.testSuites != null && !this.testSuites.isEmpty())
+        {
+            for (TestSuite child : this.testSuites)
             {
                 children.add(child);
             }
@@ -354,6 +364,7 @@ public class TestSuite implements WrapperAwareElement
         private String name;
         private String description;
         private Set<TestCase> testCases;
+        private Set<TestSuite> testSuites;
         private Properties properties;
         private DynamicInclude dynamicInclude;
         private Wrapper beforeFirst;
@@ -395,6 +406,32 @@ public class TestSuite implements WrapperAwareElement
         public Builder withTestCases(Set<TestCase> testCases)
         {
             this.testCases = testCases;
+            return this;
+        }
+
+        public Builder addTestCase(TestCase testCase)
+        {
+            if (this.testCases == null)
+            {
+                this.testCases = new LinkedHashSet<>();
+            }
+            this.testCases.add(testCase);
+            return this;
+        }
+
+        public Builder withTestSuites(Set<TestSuite> testSuites)
+        {
+            this.testSuites = testSuites;
+            return this;
+        }
+
+        public Builder addTestSuite(TestSuite testSuite)
+        {
+            if (this.testSuites == null)
+            {
+                this.testSuites = new LinkedHashSet<>();
+            }
+            this.testSuites.add(testSuite);
             return this;
         }
 

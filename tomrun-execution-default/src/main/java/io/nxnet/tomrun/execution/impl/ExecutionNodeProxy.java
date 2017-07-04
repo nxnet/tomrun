@@ -74,10 +74,10 @@ public class ExecutionNodeProxy extends ExecutionNodeImpl
         delegee.doExec();
     }
 
-    public Iterator<ExecutionNode> getIter()
+    public Iterator<ExecutionNode> iterator()
     {
         init();
-        return delegee.getIter();
+        return delegee.iterator();
     }
 
     public void addChild(ExecutionNode n)

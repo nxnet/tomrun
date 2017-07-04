@@ -1,12 +1,13 @@
 package io.nxnet.tomrun.execution;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ExecutionNodeWritter
+public class ExecutionNodeWritter implements Closeable
 {
     private Writer writer;
 
@@ -20,7 +21,11 @@ public class ExecutionNodeWritter
 
     public void write(ExecutionNode node) throws IOException
     {
-        this.writeNodeTree(node);
+        Iterator<ExecutionNode> nodeIter = node.iterator();
+        while (nodeIter.hasNext())
+        {
+            this.writeNodeLine(nodeIter.next());
+        }
     }
 
     public void close() throws IOException
@@ -28,25 +33,6 @@ public class ExecutionNodeWritter
         if (this.writer != null)
         {
             this.writer.close();
-        }
-    }
-    
-    void writeNodeTree(ExecutionNode node) throws IOException
-    {
-        // Iterate over nodes and print each one
-        ExecutionNode printingNode = null;
-        Iterator<ExecutionNode> printingNodeIter = node.getIter();
-        while (printingNodeIter.hasNext())
-        {
-            printingNode = printingNodeIter.next();
-            if (printingNode == node)
-            {
-                this.writeNodeLine(printingNode);
-            }
-            else
-            {
-                this.writeNodeTree(printingNode);
-            }
         }
     }
 

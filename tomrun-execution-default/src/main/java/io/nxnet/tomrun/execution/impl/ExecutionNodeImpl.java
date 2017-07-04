@@ -11,6 +11,7 @@ import io.nxnet.tomrun.execution.ExecutionNode;
 import io.nxnet.tomrun.execution.ExecutionNodeEvent;
 import io.nxnet.tomrun.execution.ExecutionNodeEventName;
 import io.nxnet.tomrun.execution.ExecutionNodeType;
+import javax.annotation.Generated;
 
 public class ExecutionNodeImpl extends Observable implements ExecutionNode
 {
@@ -39,6 +40,31 @@ public class ExecutionNodeImpl extends Observable implements ExecutionNode
     protected List<ExecutionNode> expandedChildList;
 
     protected boolean expandedChildListObsolete;
+
+    @Generated("SparkTools")
+    private ExecutionNodeImpl(Builder builder)
+    {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.description = builder.description;
+        this.type = builder.type;
+        this.context = builder.context;
+        this.parent = builder.parent;
+        this.children = builder.children;
+        if (this.children != null)
+        {
+            for (ExecutionNode child : this.children)
+            {
+                child.setParent(this);
+            }
+        }
+        this.before = builder.before;
+        this.after = builder.after;
+        this.beforeChild = builder.beforeChild;
+        this.afterChild = builder.afterChild;
+        this.expandedChildList = builder.expandedChildList;
+        this.expandedChildListObsolete = builder.expandedChildListObsolete;
+    }
 
     public ExecutionNodeImpl(String id, String name, String description, ExecutionNodeType type)
     {
@@ -407,19 +433,9 @@ public class ExecutionNodeImpl extends Observable implements ExecutionNode
     }
 
     @Override
-    public Iterator<ExecutionNode> getIter()
+    public Iterator<ExecutionNode> iterator()
     {
-        // Make temporary flat collection
-        List<ExecutionNode> tmpList = new ArrayList<ExecutionNode>();
-
-        // Add this node
-        tmpList.add(this);
-
-        // Add all children
-        tmpList.addAll(this.getExpandedChildren());
-
-        // Get iterator for such flat collection
-        return tmpList.iterator();
+        return new ExecutionNodeIterator(this);
     }
 
     @Override
@@ -584,16 +600,23 @@ public class ExecutionNodeImpl extends Observable implements ExecutionNode
         return builder.toString();
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode()
     {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((parent == null) ? 0 : parent.hashCode());
         result = prime * result + ((type == null) ? 0 : type.hashCode());
         return result;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj)
     {
@@ -601,7 +624,7 @@ public class ExecutionNodeImpl extends Observable implements ExecutionNode
             return true;
         if (obj == null)
             return false;
-        if (!ExecutionNodeImpl.class.isAssignableFrom(obj.getClass()))
+        if (getClass() != obj.getClass())
             return false;
         ExecutionNodeImpl other = (ExecutionNodeImpl) obj;
         if (id == null)
@@ -611,12 +634,14 @@ public class ExecutionNodeImpl extends Observable implements ExecutionNode
         }
         else if (!id.equals(other.id))
             return false;
-        if (type == null)
+        if (parent == null)
         {
-            if (other.type != null)
+            if (other.parent != null)
                 return false;
         }
-        else if (!type.equals(other.type))
+        else if (!parent.equals(other.parent))
+            return false;
+        if (type != other.type)
             return false;
         return true;
     }
@@ -692,4 +717,199 @@ public class ExecutionNodeImpl extends Observable implements ExecutionNode
         return this.expandedChildList;
     }
 
+    /**
+     * Creates builder to build {@link ExecutionNodeImpl}.
+     * @return created builder
+     */
+    @Generated("SparkTools")
+    public static Builder builder()
+    {
+        return new Builder();
+    }
+
+    /**
+     * Builder to build {@link ExecutionNodeImpl}.
+     */
+    @Generated("SparkTools")
+    public static final class Builder
+    {
+        private String id;
+        private String name;
+        private String description;
+        private ExecutionNodeType type;
+        private OwnableContext context;
+        private ExecutionNode parent;
+        private List<ExecutionNode> children;
+        private ExecutionNode before;
+        private ExecutionNode after;
+        private ExecutionNode beforeChild;
+        private ExecutionNode afterChild;
+        private List<ExecutionNode> expandedChildList;
+        private boolean expandedChildListObsolete = true;
+
+        private Builder()
+        {
+        }
+
+        public Builder withId(String id)
+        {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withName(String name)
+        {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withDescription(String description)
+        {
+            this.description = description;
+            return this;
+        }
+
+        public Builder withType(ExecutionNodeType type)
+        {
+            this.type = type;
+            return this;
+        }
+
+        public Builder withContext(OwnableContext context)
+        {
+            this.context = context;
+            return this;
+        }
+
+        public Builder withParent(ExecutionNode parent)
+        {
+            this.parent = parent;
+            return this;
+        }
+
+        public Builder withChildren(List<ExecutionNode> children)
+        {
+            this.children = children;
+            return this;
+        }
+
+        public Builder addChild(ExecutionNode child)
+        {
+            if (this.children == null)
+            {
+                this.children = new ArrayList<>();
+            }
+            this.children.add(child);
+            return this;
+        }
+
+        public Builder withBefore(ExecutionNode before)
+        {
+            this.before = before;
+            return this;
+        }
+
+        public Builder withAfter(ExecutionNode after)
+        {
+            this.after = after;
+            return this;
+        }
+
+        public Builder withBeforeChild(ExecutionNode beforeChild)
+        {
+            this.beforeChild = beforeChild;
+            return this;
+        }
+
+        public Builder withAfterChild(ExecutionNode afterChild)
+        {
+            this.afterChild = afterChild;
+            return this;
+        }
+
+        public Builder withExpandedChildList(List<ExecutionNode> expandedChildList)
+        {
+            this.expandedChildList = expandedChildList;
+            return this;
+        }
+
+        public Builder withExpandedChildListObsolete(boolean expandedChildListObsolete)
+        {
+            this.expandedChildListObsolete = expandedChildListObsolete;
+            return this;
+        }
+
+        public ExecutionNodeImpl build()
+        {
+            if (this.id == null)
+            {
+                throw new IllegalStateException("Id for execution node not defined!");
+            }
+            if (this.type == null)
+            {
+                throw new IllegalStateException("Type for execution node not defined!");
+            }
+            return new ExecutionNodeImpl(this);
+        }
+    }
+
+    private class ExecutionNodeIterator implements Iterator<ExecutionNode>
+    {
+        private final ExecutionNode self;
+
+        private boolean selfReturned;
+
+        private int childPosition;
+
+        private final int childEndPosition;
+
+        private Iterator<ExecutionNode> childIter;
+
+        public ExecutionNodeIterator(ExecutionNode self)
+        {
+            this.self = self;
+            this.selfReturned = false;
+            this.childPosition = -1;
+            this.childEndPosition = (children != null ? children.size() : 0) - 1;
+        }
+
+        @Override
+        public boolean hasNext()
+        {
+            return !this.isSelfReturned() || this.hasNextChild() || this.childHasNext();
+        }
+
+        @Override
+        public ExecutionNode next()
+        {
+            if (!this.isSelfReturned())
+            {
+                this.selfReturned = true;
+                return this.self;
+            }
+
+            if (!this.childHasNext() && this.hasNextChild())
+            {
+                this.childIter = children.get(++this.childPosition).iterator();
+            }
+
+            return this.childIter != null ? this.childIter.next() : null;
+        }
+
+        private boolean isSelfReturned()
+        {
+            return this.selfReturned;
+        }
+
+        private boolean hasNextChild()
+        {
+            return this.childPosition < this.childEndPosition;
+        }
+
+        private boolean childHasNext()
+        {
+            return this.childIter != null && this.childIter.hasNext();
+        }
+
+    }
 }
